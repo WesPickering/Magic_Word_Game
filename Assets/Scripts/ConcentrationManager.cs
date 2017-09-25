@@ -6,26 +6,50 @@ using UnityEngine.SceneManagement;
 
 public class ConcentrationManager: MonoBehaviour {
 
-	public Sprite[] cardFace ;
+	public Sprite[] cardFace;
 	public Sprite cardBack;
 	public GameObject[] cards;
-	public Text matchText;
+	public Text ScoreText;
+	public Text TimerText;
 
 	private bool init = false;
-	private int matches = 13;
+	private int score = 0;
+	private GameManager gameManager;
+	private int dimX;
+	private int dimY;
+	private float time;
 
+
+	void Awake() {
+		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
+		cardFace = gameManager.cardFaces;
+		dimX = gameManager.dimensions[0];
+		dimY = gameManager.dimensions[1];
+		time = 60f;
+		TimerText.text = "Time Left: " + (int) time;
+
+
+		initializeCards ();
+
+
+	}
 	void Update() {
-		if (!init)
-			initializeCards ();
-
 		if (Input.GetMouseButtonUp(0)) {
 			checkCards ();
 		}
+		time -= Time.deltaTime;
+		TimerText.text = "Time Left: " + (int) time;
+//		if (time <= 0) {
+//			GameManager.ResetGame ();
+//		}
+
+
 	}
 
 	void initializeCards (){
-		for (int i = 0; i < 2; i++) {
-			for (int j = 1; j < 14; j++) {
+		
+		for (int i = 0; i < dimX; i++) {
+			for (int j = 1; j <= dimY; j++) {
 				bool test = false;
 				int choice = 0;
 				while (!test) {
@@ -50,6 +74,8 @@ public class ConcentrationManager: MonoBehaviour {
 	}
 
 	public Sprite getCardFace(int i) {
+		Debug.Log (i);
+
 		return cardFace [i-1];
 	}
 
@@ -72,12 +98,8 @@ public class ConcentrationManager: MonoBehaviour {
 
 		if (cards[c[0]].GetComponent<Card>().cardValue == cards[c[1]].GetComponent<Card>().cardValue) {
 			x = 2;
-//			matches--;
-//			matchText.text = "Number of Matches: " + matches;
-
-			if (matches == 0) {
-				SceneManager.LoadScene ("Menu");
-			}
+			score += 20;
+			ScoreText.text = "Score: " + score;
 		}
 
 		for (int i = 0; i < c.Count; i++) {

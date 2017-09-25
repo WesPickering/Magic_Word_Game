@@ -16,13 +16,15 @@ public class Card : MonoBehaviour {
 	private Sprite cardFace;
 	private GameObject gameManager;
 
-	void Start(){
+	void Awake(){
 		_state = 1;
 		gameManager = GameObject.FindGameObjectWithTag ("Manager");
 	}
 
 	public void setUpCards() {
+		Debug.Log (gameManager);
 		cardBack = gameManager.GetComponent<ConcentrationManager> ().getCardBack ();
+		Debug.Log (_cardValue);
 		cardFace = gameManager.GetComponent<ConcentrationManager> ().getCardFace (_cardValue);
 
 		StartCoroutine (showCards ());
@@ -30,7 +32,7 @@ public class Card : MonoBehaviour {
 
 	IEnumerator showCards() {
 		_state = 1;
-		yield return new WaitForSeconds (10);
+		yield return new WaitForSeconds (2);
 		flipCard ();
 	}
 
@@ -46,6 +48,7 @@ public class Card : MonoBehaviour {
 		} else if (_state == 1 && !STOP_MECH) {
 			GetComponent<Image> ().sprite = cardFace;
 		}
+
 	}
 
 	public int cardValue {
@@ -68,7 +71,8 @@ public class Card : MonoBehaviour {
 	}
 
 	IEnumerator pause() {
-		yield return new WaitForSeconds(1);
+		STOP_MECH = true;
+		yield return new WaitForSeconds(.5f);
 		if (_state == 0) {
 			GetComponent<Image> ().sprite = cardBack;
 		} else if (state == 1) {
