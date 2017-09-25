@@ -12,6 +12,10 @@ public class Stage1Controller : MonoBehaviour {
 	public Sprite[] leibnizSprites;
 	public Sprite[] thothSprites;
 	public Sprite[] hermesSprites;
+	public Sprite odinUI;
+	public Sprite leibnizUI;
+	public Sprite thothUI;
+	public Sprite HermesUI;
 
 	private GameManager gameManager;
 	private string[] godNames = new string[4];
@@ -19,6 +23,7 @@ public class Stage1Controller : MonoBehaviour {
 //	private string[] _strengths = new string[2];
 //	private string _weakness = null;
 	private Sprite[] cardFaces;
+	private Sprite currUI;
 	private int[] dimensions = new int[2];
 
 	void Awake() {
@@ -39,6 +44,7 @@ public class Stage1Controller : MonoBehaviour {
 //		_strengths [1] = "Earth";
 //		_weakness = "Water";
 		cardFaces = odinSprites;
+		currUI = odinUI;
 
 	}
 
@@ -50,6 +56,7 @@ public class Stage1Controller : MonoBehaviour {
 //		_strengths [1] = "Earth";
 //		_weakness = "Aether";
 		cardFaces = leibnizSprites;
+		currUI = leibnizUI;
 	}
 
 	public void setHermes() {
@@ -60,6 +67,7 @@ public class Stage1Controller : MonoBehaviour {
 //		_strengths [1] = "Aether";
 //		_weakness = "Fire";
 		cardFaces = hermesSprites;
+		currUI = HermesUI;
 	}
 
 	public void setThoth() {
@@ -70,6 +78,7 @@ public class Stage1Controller : MonoBehaviour {
 //		_strengths [1] = "Earth";
 //		_weakness = "Air";
 		cardFaces = thothSprites;
+		currUI = thothUI;
 	}
 
 	public void StartGame() {
@@ -80,9 +89,8 @@ public class Stage1Controller : MonoBehaviour {
 //		gameManager.weakness = _weakness;
 		gameManager.cardFaces = cardFaces;
 		gameManager.dimensions = dimensions;
+		gameManager.backgroundUI = currUI;
 
-		Debug.Log (gameManager.weakness);
-		Debug.Log (gameManager.godName);
 		SceneManager.LoadScene ("Concentration Scene");
 	}
 }

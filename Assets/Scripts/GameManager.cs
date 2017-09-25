@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
 	private Sprite[] _cardFaces;
 	private int[] _dimensions = new int[2];
+	private Sprite _backgroundUI;
 
 	private int powerLevel = 0;
 	private float powerScalar = 0;
@@ -74,5 +75,10 @@ public class GameManager : MonoBehaviour {
 	public int[] dimensions{
 		get { return _dimensions; }
 		set { _dimensions = value; }
+	}
+
+	public Sprite backgroundUI {
+		get{ return _backgroundUI; }
+		set { _backgroundUI = value; }
 	}
 }

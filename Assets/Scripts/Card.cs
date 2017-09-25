@@ -22,9 +22,7 @@ public class Card : MonoBehaviour {
 	}
 
 	public void setUpCards() {
-		Debug.Log (gameManager);
 		cardBack = gameManager.GetComponent<ConcentrationManager> ().getCardBack ();
-		Debug.Log (_cardValue);
 		cardFace = gameManager.GetComponent<ConcentrationManager> ().getCardFace (_cardValue);
 
 		StartCoroutine (showCards ());

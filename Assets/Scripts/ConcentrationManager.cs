@@ -11,6 +11,7 @@ public class ConcentrationManager: MonoBehaviour {
 	public GameObject[] cards;
 	public Text ScoreText;
 	public Text TimerText;
+	public Image background;
 
 	private bool init = false;
 	private int score = 0;
@@ -25,6 +26,8 @@ public class ConcentrationManager: MonoBehaviour {
 		cardFace = gameManager.cardFaces;
 		dimX = gameManager.dimensions[0];
 		dimY = gameManager.dimensions[1];
+		background.sprite = gameManager.backgroundUI;
+
 		time = 60f;
 		TimerText.text = "Time Left: " + (int) time;
 
@@ -74,8 +77,6 @@ public class ConcentrationManager: MonoBehaviour {
 	}
 
 	public Sprite getCardFace(int i) {
-		Debug.Log (i);
-
 		return cardFace [i-1];
 	}
 
